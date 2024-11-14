@@ -1,6 +1,6 @@
 #ifndef STM32F446xx_H
 #define STM32F446xx_H
-
+#include <stdint.h>
 /******************* Various Memories Base Addresses *******************/
 #define FLASH_BASE_ADDRESS           0x08000000UL
 #define SRAM_BASE_ADDRESS			 0x20000000UL
@@ -27,9 +27,14 @@
 /******************* AHB3 Preipherals Base Addresses *******************/
 
 /******************* APB1 Preipherals Base Addresses *******************/
+#define USART2_BASE_ADDRESS			 0x40004400
+#define USART3_BASE_ADDRESS			 0x40004800
+#define UART4_BASE_ADDRESS			 0x40004C00
+#define UART5_BASE_ADDRESS			 0x40005000
 
 /******************* APB2 Preipherals Base Addresses *******************/
-
+#define USART1_BASE_ADDRESS			 0x40011000
+#define USART6_BASE_ADDRESS			 0x40011400
 
 /******************* GPIO Register Definition Structure *******************/
 
@@ -129,6 +134,28 @@ typedef struct
 /******************* NVIC Preipheral Base Addresses *******************/
 
 #define NVIC                  ((NVIC_RegDef_t*)NVIC_BASE_ADDRESS)   /*!< Pointer to NVIC_RegDef Struct*/
+
+/******************* USART Register Definition Structure *******************/
+typedef struct 
+{
+	volatile uint32_t SR;    /*!< USART Status Register: Holds flags for various status conditions, e.g., TX/RX complete, errors */
+	volatile uint32_t DR;    /*!< USART Data Register: Holds the data to be transmitted or received */
+	volatile uint32_t BRR;   /*!< USART Baud Rate Register: Configures the baud rate for communication */
+	volatile uint32_t CR1;   /*!< USART Control Register 1: Configures primary USART settings, e.g., enable USART, word length */
+	volatile uint32_t CR2;   /*!< USART Control Register 2: Configures additional features, e.g., stop bit length, clock settings */
+	volatile uint32_t CR3;   /*!< USART Control Register 3: Configures further settings, e.g., error interrupts, DMA control */
+	volatile uint32_t GTPR;  /*!< USART Guard Time and Prescaler Register: Used in Smartcard mode and with the prescaler */
+} USART_RegDef_t;
+
+/******************* USART Peripheral Base Address Macros *******************/
+#define USART_1         ((USART_RegDef_t*)USART1_BASE_ADDRESS) /*!< USART1 base address typecasted to USART_RegDef_t */
+#define USART_2         ((USART_RegDef_t*)USART2_BASE_ADDRESS) /*!< USART2 base address typecasted to USART_RegDef_t */
+#define USART_3         ((USART_RegDef_t*)USART3_BASE_ADDRESS) /*!< USART3 base address typecasted to USART_RegDef_t */
+#define UART_4          ((USART_RegDef_t*)UART4_BASE_ADDRESS)  /*!< UART4 base address typecasted to USART_RegDef_t */
+#define UART_5          ((USART_RegDef_t*)UART5_BASE_ADDRESS)  /*!< UART5 base address typecasted to USART_RegDef_t */
+#define USART_6         ((USART_RegDef_t*)USART6_BASE_ADDRESS) /*!< USART6 base address typecasted to USART_RegDef_t */
+
+
 
 
 #endif 
